@@ -7,7 +7,7 @@ import(
 )
 //GenerarJWT genera el encriptado con JWT
 func GenerarJWT(user models.Usuario)(string,error){
-	miClave := []byte("Las minas de moria estan en el señor de los anillos")
+	miClave := []byte("minas-moria")
 	payload := jwt.MapClaims{
 		"email"		: 	user.Email,
 		"nombre"	:	user.Nombre,

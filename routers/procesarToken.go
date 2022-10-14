@@ -13,20 +13,27 @@ var Email string
 var IDUsuario string
 //Procesa el token para extraer sus valores
 func ProcesarToken(tk string)(*models.Claim, bool, string, error){
-miClave :=[]byte("Las minas de moria estan en el señor de los anillos")
+miClave := []byte("minas-moria")
 claims := &models.Claim{}
 
+//token := tk
+
+/*
 splitToken := strings.Split(tk,"Bearer")
 if len(splitToken) != 2{
 	return claims,false,string(""), errors.New("formato de token invalido")
 }
-
+*/
 //Eliminamos espacion en blanco
-tk = strings.TrimSpace(splitToken[1])
+//tk = strings.TrimSpace(splitToken[1])
+
+tk = strings.TrimSpace(tk)
+
 
 tkn, err := jwt.ParseWithClaims(tk, claims, func(token *jwt.Token)(interface{}, error){
 	return miClave, nil
 })
+
 if err == nil{
 	_, encontrado, _ := bd.ChequeoYaExisteUsuario(claims.Email)
 	if encontrado == true{
@@ -36,8 +43,8 @@ if err == nil{
 	return claims,encontrado, IDUsuario,nil
 }
 if !tkn.Valid{
-	return claims, false, string(""), errors.New("token invaldo")
+	return claims, false, string(""),errors.New(" Hello")
 }
-return claims, false, string(""), err
+return claims, false, string(""), nil
 
 }

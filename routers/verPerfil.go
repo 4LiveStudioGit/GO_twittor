@@ -1,6 +1,7 @@
 package routers
 
 import (
+	
 	"encoding/json"
 	"net/http"
 	"github.com/4LiveStudioGit/GO_twittor/bd"
@@ -15,8 +16,7 @@ func VerPerfil(w http.ResponseWriter, r *http.Request){
 	}
 	perfil, err := bd.BuscarPerfil(ID)
 	if err != nil{
-		http.Error(w, "Ocurrió un error al buscar el registro" + err.Error(),400)
-		return
+		http.Error(w, "Ocurrió un error al buscar el registro " + err.Error() , 400)
 	}
 
 	w.Header().Set("context-type","application/json")

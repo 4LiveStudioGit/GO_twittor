@@ -12,7 +12,7 @@ import (
 func BuscarPerfil(ID string)(models.Usuario, error){
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
-	db:= MongoCN.Database("GOtwittor")
+	db:= MongoCN.Database("GOTwittor")
 	col := db.Collection("Usuarios")
 
 	var perfil models.Usuario
@@ -21,11 +21,12 @@ func BuscarPerfil(ID string)(models.Usuario, error){
 	condicion := bson.M{
 		"_id": objID,
 	}
+	
 
 	err:= col.FindOne(ctx,condicion).Decode(&perfil)
 	perfil.Password = ""
 	if err != nil {
-		fmt.Println("Registro no encontrado"+ err.Error())
+		fmt.Println("Registro no encontrado "+ err.Error())
 		return perfil, err
 	}
 	return perfil, nil
